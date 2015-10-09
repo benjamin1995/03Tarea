@@ -9,7 +9,7 @@ from matplotlib import cm
 #PARTE1
 
 '''
-En esta parte del script se resuelve la ecuación diferencial del oscilador de Van der pol mediante el metodo de runge-kutta de orden 3
+En esta parte del script se resuelve la ecuacion diferencial del oscilador de Van der pol mediante el metodo de runge-kutta de orden 3
 
 '''
 
@@ -17,7 +17,7 @@ En esta parte del script se resuelve la ecuación diferencial del oscilador de V
 
 
 '''
- Se define la funcion matricial f(y(s),w=y´(s)) (independiente de la variable s) en forma matricial reduciendo a orden 1 la ecuacion original de orden 2
+ Se define la funcion matricial f(y(s),w=dy/ds) (independiente de la variable s) en forma matricial reduciendo a orden 1 la ecuacion original de orden 2
 '''
 def f(y,w):
     return w,-y-mu*((y**2)-1)*w
@@ -101,6 +101,8 @@ plt.title('$y(s)$ $v/s$ $s$')
 plt.xlabel('s')
 plt.ylabel('y(s)')
 plt.legend()
+plt.savefig('primeracondicion.png')
+
 
 
 # Segunda condicion inicial para graficar (y0=4,w0=0)
@@ -130,7 +132,7 @@ plt.xlabel('s')
 plt.ylabel('y(s)')
 plt.legend()
 
-
+plt.savefig('segundacondicion.png')
 plt.show()
 plt.draw()
 
@@ -185,8 +187,8 @@ while solution.successful() and solution.t < t1:
     t_n[i],(sol_n[0][i],sol_n[1][i],sol_n[2][i])=[solution.t,(solution.integrate(solution.t+dt))]
     i += 1
 
-# grafico de (x,y,z)
-fig=plt.figure(5)
+# grafico de (x,y,z) (se anexan 4 graficos con distintas condiciones iniciales)
+fig=plt.figure(3)
 fig.clf()
 
 ax = fig.add_subplot(111,projection='3d')
@@ -194,6 +196,7 @@ ax.plot(sol_n[0],sol_n[1],sol_n[2],'green')
 ax.set_xlabel('x(t)')
 ax.set_ylabel('y(t)')
 ax.set_zlabel('z(t)')
-ax.set_title('Atractor de Lorentz')
+ax.set_title('Atractor de Lorentz (x0,y0,z0)=(1,1,1)')
+plt.savefig('atractordelorenz.png')
 
 fig.show()
